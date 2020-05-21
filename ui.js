@@ -36,7 +36,10 @@ $(async function() {
   // global currentUser variable
   let currentUser = null;
 
+  // my global vars
   let editedStory = null;
+
+  let storyCount = 1;
 
   await checkIfLoggedIn();
 
@@ -532,7 +535,7 @@ async function generateMoreStories( count ) {
 }
 window.onscroll = async function(ev) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    let storyCount = 1;
+
       if(storyList.stories.length % 25 === 0){
        await generateMoreStories(storyCount);
        storyCount++;
