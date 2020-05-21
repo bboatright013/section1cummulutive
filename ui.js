@@ -504,9 +504,9 @@ function isEquivalent(a, b) {
   /*
 * Infinite Scroll -BB
 */
-async function generateMoreStories() {
+async function generateMoreStories( count ) {
   // get an instance of StoryList
-  const storyListInstance = await StoryList.getStories(25);
+  const storyListInstance = await StoryList.getStories(25 * count);
   // update our global variable
   storyListInstance.stories.forEach(story => {
     storyList.stories.push(story);
@@ -532,8 +532,10 @@ async function generateMoreStories() {
 }
 window.onscroll = async function(ev) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    let storyCount = 1;
       if(storyList.stories.length % 25 === 0){
-       await generateMoreStories();
+       await generateMoreStories(storyCount);
+       storyCount++;
       }
   }
 };
